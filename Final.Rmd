@@ -1,0 +1,14 @@
+---
+title: "Final Project"
+author: "Bryan Blette, Meichen Dong, Rujin Wang"
+date: "`r format(Sys.time(), '%m/%d/%Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
