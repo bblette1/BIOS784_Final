@@ -14,14 +14,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(AnnotationHub)
 ah <- AnnotationHub()
-display(ah)
+#display(ah)
 ```
 
 ```{r}
-library(wavClusteR)
-test <- getClusters(ah[["AH29067"]])
+#library(wavClusteR)
+test <- ah[["AH29067"]]
 
-subset(ah, rdatapath == "peaks/consolidated/broadPeak/E017-DNase.hotspot.broad.bed.gz")[[1]]
+#subset(ah, rdatapath == "peaks/consolidated/broadPeak/E017-DNase.hotspot.broad.bed.gz")[[1]]
 ```
 
 
