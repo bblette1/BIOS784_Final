@@ -14,14 +14,22 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(AnnotationHub)
 ah <- AnnotationHub()
-#display(ah)
+display(ah)
 ```
 
 ```{r}
-#library(wavClusteR)
-test <- ah[["AH29067"]]
+library(AnnotationHub)
+ah <- AnnotationHub()
 
-#subset(ah, rdatapath == "peaks/consolidated/broadPeak/E017-DNase.hotspot.broad.bed.gz")[[1]]
+# this will fail but download the file 
+dat <- ah[["AH29067"]]
+
+
+fpath = cache(ah["AH29067"])
+tbl = read.delim(fpath, sep="\t", header=FALSE, 
+                 col.names=c("seqnames", "start", "end", "strand", "score"))
+dat = GRanges(tbl)
+dat
 ```
 
 
