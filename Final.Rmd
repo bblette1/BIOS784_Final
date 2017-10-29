@@ -12,26 +12,73 @@ knitr::opts_chunk$set(echo = TRUE)
 ## R Markdown
 
 ```{r}
-library(AnnotationHub)
-ah <- AnnotationHub()
-display(ah)
+#library(AnnotationHub)
+#ah <- AnnotationHub()
+#display(ah)
 ```
 
 ```{r}
 library(AnnotationHub)
+library(GenomicRanges)
 ah <- AnnotationHub()
 
 # this will fail but download the file 
-dat <- ah[["AH29067"]]
+dat <- ah[["AH29164"]]
 
 
-fpath = cache(ah["AH29067"])
+fpath = cache(ah["AH29164"])
 tbl = read.delim(fpath, sep="\t", header=FALSE, 
                  col.names=c("seqnames", "start", "end", "strand", "score"))
 dat = GRanges(tbl)
 dat
 ```
 
+```{r}
+subset_dat <- dat[seqnames(dat) == "chr2"]
+ranges(subset_dat)
+
+starts <- start(ranges(subset_dat))
+ends <- end(ranges(subset_dat))
+
+GWAS_position <- rep(162922103,length(starts))
+
+min(abs(midranges-GWAS_position))
+
+midranges <- (starts+ends)/2
+
+min(abs(midranges-GWAS_position))
+hist(midranges-GWAS_position,xlim=c(-10000,10000),breaks=c(-10000000000,-10000,-7500,-5000,-2500,0,2500,5000,7500,10000,10000000000000))
+```
+
+```{r}
+dat2 <- ah[["AH29649"]]
+
+
+fpath = cache(ah["AH29649"])
+tbl = read.delim(fpath, sep="\t", header=FALSE, 
+                 col.names=c("seqnames", "start", "end", "strand", "score"))
+dat2 = GRanges(tbl)
+dat2
+
+
+subset_dat2 <- dat2[seqnames(dat2) == "chr2"]
+ranges(subset_dat2)
+
+starts <- start(ranges(subset_dat2))
+ends <- end(ranges(subset_dat2))
+
+GWAS_position <- rep(162922103,length(starts))
+
+midranges <- (starts+ends)/2
+
+min(abs(midranges-GWAS_position))
+hist(midranges-GWAS_position,xlim=c(-10000,10000),breaks=c(-10000000000,-10000,-7500,-5000,-2500,0,2500,5000,7500,10000,10000000000000))
+```
+
+
+```{r}
+#dat_GWAS <- read.table("C:/Users/bblette1/Downloads/GWAS_Catalog.txt",sep = "\t")
+```
 
 
 
